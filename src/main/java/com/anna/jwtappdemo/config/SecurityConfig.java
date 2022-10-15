@@ -19,7 +19,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String ADMIN_ENDPOINT="/api/v1/admin/**";
     private static final String MODERATOR_ENDPOINT="/api/v1/moderator/**";
     private static final String LOGIN_ENDPOINT ="/api/v1/auth/login";
-    private static final String FILES_ENDPOINT ="/api/v1/files";
+    private static final String FILES_ENDPOINT ="/api/v1/files/**";
+    private static final String USERS_ENDPOINT ="/api/v1/users/**";
+    private static final String EVENTS_ENDPOINT ="/api/v1/events/**";
+
 
     @Autowired
     public SecurityConfig(JwtTokenProvider jwtTokenProvider){
@@ -41,9 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 .antMatchers(LOGIN_ENDPOINT).permitAll()
-                .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
-                .antMatchers(FILES_ENDPOINT).hasAnyAuthority()
-                .antMatchers(MODERATOR_ENDPOINT).hasRole("MODERATOR")
+                .antMatchers(ADMIN_ENDPOINT).permitAll() //.hasRole("ADMIN")
+                .antMatchers(FILES_ENDPOINT).permitAll() //.hasRole("ADMIN")
+                .antMatchers(EVENTS_ENDPOINT).permitAll() //.hasRole("ADMIN")
+                .antMatchers(FILES_ENDPOINT).permitAll() ///.hasRole("ADMIN")
+                .antMatchers(MODERATOR_ENDPOINT).permitAll() //.hasRole("MODERATOR")
+                .antMatchers(USERS_ENDPOINT).permitAll() //.hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .apply(new JwtConfigurer(jwtTokenProvider));

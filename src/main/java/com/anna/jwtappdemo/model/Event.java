@@ -6,11 +6,7 @@ import javax.persistence.*;
 @Entity
 @Table(name="events")
 @Data
-public class Event {
-
-    @Id
-    @GeneratedValue(strategy =  GenerationType.IDENTITY)
-    private Long id;
+public class Event extends BaseEntity {
 
     @Enumerated(EnumType.STRING)
     @Column(name ="action")

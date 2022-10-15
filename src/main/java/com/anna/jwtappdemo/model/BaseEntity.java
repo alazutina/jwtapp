@@ -27,4 +27,13 @@ public class BaseEntity {
     @Column(name ="status")
     private Status status;
 
+    @Override
+    public String toString() {
+        return "BaseEntity{" +
+                "id=" + id +
+                ", created=" + created +
+                ", updated=" + updated +
+                ", status=" + status +
+                '}';
+    }
 }

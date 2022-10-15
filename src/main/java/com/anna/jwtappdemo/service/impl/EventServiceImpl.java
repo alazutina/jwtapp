@@ -30,12 +30,9 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
-    public Event add(Event event) {
-
+    public Event register(Event event) {
         Event event1 = eventRepository.save(event);
-
         log.info("In saving - event {} successfully save ", event1);
-
         return event1;
     }
 

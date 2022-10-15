@@ -30,19 +30,14 @@ public class FileServiceImpl implements FileService {
     }
 
     @Override
-    public File add(File file) {
-
+    public File register(File file) {
         File file1 = fileRepository.save(file);
-
         log.info("In register - file {} successfully save ", file1);
-
         return file1;
-
     }
 
     @Override
     public List<File> getAll() {
-
         List<File> result = fileRepository.findAll();
         log.info("in getAll - {} files found", result.size());
         return result;
@@ -54,6 +49,7 @@ public class FileServiceImpl implements FileService {
         log.info("in findByPath - file {} found by path {} ", result, path);
         return result;
     }
+
     @Override
     public File findById(Long id) {
         File result = fileRepository.findById(id).orElse(null);
@@ -65,11 +61,11 @@ public class FileServiceImpl implements FileService {
         return result;
     }
 
-//    @Override
-//    public File update(File file) {
-//        fileRepository.
-//        return null;
-//    }
+    @Override
+    public File update(File file) {
+        log.warn("In update - file {} updated", file);
+        return fileRepository.save(file);
+    }
 
     @Override
     public void delete(Long id) {

@@ -2,6 +2,7 @@ package com.anna.jwtappdemo.rest;
 
 import com.anna.jwtappdemo.dto.FileDto;
 import com.anna.jwtappdemo.model.File;
+import com.anna.jwtappdemo.model.Status;
 import com.anna.jwtappdemo.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,12 +20,8 @@ public class FileRestControllerV1 {
 
         @Autowired
         public FileRestControllerV1(FileService fileService) {
-
             this.fileService = fileService;
         }
-
-
-
 
         @GetMapping(value = "")
         public ResponseEntity<List<FileDto>> getAllFiles() {
@@ -52,16 +49,25 @@ public class FileRestControllerV1 {
 
     @DeleteMapping(value = "{id}")
     public ResponseEntity<FileDto> deleteFileById(@PathVariable(name = "id") Long id){
-            File file = fileService.findById(id);
-
-        if(file==null){
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-        }
         fileService.delete(id);
-        FileDto result = FileDto.fromFile(file);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/save")
+    public ResponseEntity<FileDto> save(@RequestBody File object) {
+        System.out.println(object+"!");
+        object.setStatus(Status.ACTIVE);
+        File file1 =   fileService.register(object);
+        FileDto result = FileDto.fromFile(file1);
         return new ResponseEntity<>(result,HttpStatus.OK);
     }
 
+    @PutMapping("/update")
+    public ResponseEntity<FileDto> update(@RequestBody File object) {
+        File file1 =   fileService.update(object);
+        FileDto result = FileDto.fromFile(file1);
+        return new ResponseEntity<>(result,HttpStatus.OK);
     }
+}
 
 

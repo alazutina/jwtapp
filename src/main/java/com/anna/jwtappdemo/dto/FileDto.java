@@ -1,6 +1,7 @@
 package com.anna.jwtappdemo.dto;
 
 import com.anna.jwtappdemo.model.File;
+import com.anna.jwtappdemo.model.User;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
@@ -17,8 +18,9 @@ public class FileDto {
 
     public static FileDto fromFile(File file){
         FileDto fileDto = new FileDto();
-        fileDto.setPath(fileDto.path);
+        fileDto.setPath(file.getPath());
         return fileDto;
     }
+
 
 }

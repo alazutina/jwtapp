@@ -18,5 +18,13 @@ public class File extends BaseEntity {
     @JoinTable(name="events",
             joinColumns = {@JoinColumn(name ="file_id", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name="user_id", referencedColumnName="id")})
-    private List<Role> users;
+    private List<User> users;
+
+    @Override
+    public String toString() {
+        return "File{" +
+                "path='" + path + '\'' +
+                ", users=" + users +
+                "} " + super.toString();
+    }
 }

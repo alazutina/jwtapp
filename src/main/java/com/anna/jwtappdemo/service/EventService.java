@@ -5,7 +5,7 @@ import com.anna.jwtappdemo.model.Event;
 import java.util.List;
 
 public interface EventService {
-    Event add(Event event);
+    Event register(Event event);
     List<Event> getAll();
     Event findById(Long id);
     void delete(Long id);
